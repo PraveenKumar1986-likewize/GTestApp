@@ -1,0 +1,691 @@
+
+# GBP NAP Analysis AI Agent - Detailed Design
+
+## Overview
+
+The GBP NAP Analysis AI Agent automatically audits a Google Business Profile (GBP) and evaluates NAP (Name, Address, Phone) consistency across citation sources.
+
+The agent performs:
+
+- GBP data extraction
+- Citation discovery
+- NAP extraction
+- Entity matching
+- Duplicate detection
+- Consistency scoring
+- Competitor benchmarking
+- SEO recommendations
+
+---
+
+# Business Objectives
+
+## Primary Goals
+
+1. Verify NAP consistency across the web.
+2. Detect duplicate business listings.
+3. Identify inaccurate citations.
+4. Calculate NAP consistency score.
+5. Generate actionable SEO recommendations.
+
+## Expected Outputs
+
+- NAP Audit Report
+- Citation Audit Report
+- Duplicate Listings Report
+- Competitor Benchmark Report
+- SEO Recommendations
+
+---
+
+# System Architecture
+
+```text
+                    User
+                      │
+                      ▼
+              Orchestrator Agent
+                      │
+      ┌───────────────┼───────────────┐
+      ▼               ▼               ▼
+ GBP Extractor   Citation Finder   Competitor Finder
+      │               │               │
+      └──────┬────────┴───────┬───────┘
+             ▼                ▼
+       NAP Extractor    Review Extractor
+             │
+             ▼
+      Entity Matching Agent
+             │
+             ▼
+      NAP Scoring Agent
+             │
+             ▼
+ Recommendation Agent
+             │
+             ▼
+         Final Report
+```
+
+---
+
+# Agent 1: Orchestrator Agent
+
+## Purpose
+
+Coordinates all agent activities.
+
+## Responsibilities
+
+- Validate request
+- Create audit job
+- Trigger child agents
+- Collect results
+- Build final response
+
+## Input
+
+```json
+{
+  "gbp_url": "https://maps.google.com/..."
+}
+```
+
+## Output
+
+```json
+{
+  "job_id": "AUDIT-001"
+}
+```
+
+---
+
+# Agent 2: GBP Extraction Agent
+
+## Purpose
+
+Extract official business information from GBP.
+
+## Data Extracted
+
+```json
+{
+  "business_name": "ABC Technologies",
+  "address": "123 Main Road, Chennai",
+  "phone": "+91 9876543210",
+  "website": "https://abc.com",
+  "category": "Software Company"
+}
+```
+
+## Technologies
+
+- Playwright
+- Browser Automation
+- OCR
+- GPT Structured Extraction
+
+---
+
+# Agent 3: Citation Discovery Agent
+
+## Purpose
+
+Discover all online citations.
+
+## Search Queries
+
+```text
+"ABC Technologies"
+
+"ABC Technologies Chennai"
+
+"+91 9876543210"
+
+"123 Main Road Chennai"
+```
+
+## Sources
+
+- Google
+- Bing
+- Yelp
+- Facebook
+- LinkedIn
+- JustDial
+- Sulekha
+- IndiaMart
+- Yellow Pages
+
+## Output
+
+```json
+{
+  "citations": [
+    {
+      "site": "JustDial",
+      "url": "https://..."
+    },
+    {
+      "site": "Facebook",
+      "url": "https://..."
+    }
+  ]
+}
+```
+
+---
+
+# Agent 4: Citation Scraper Agent
+
+## Purpose
+
+Extract page content from citation URLs.
+
+## Input
+
+```json
+{
+  "url": "https://example.com/business"
+}
+```
+
+## Output
+
+```json
+{
+  "site": "JustDial",
+  "html": "...",
+  "text": "..."
+}
+```
+
+## Recommended Tools
+
+- Playwright
+- Puppeteer
+- Browserbase
+- Bright Data
+
+---
+
+# Agent 5: NAP Extraction Agent
+
+## Purpose
+
+Extract NAP data from citations.
+
+## Prompt
+
+```text
+Extract:
+1. Business Name
+2. Address
+3. Phone Number
+4. Website
+
+Return JSON only.
+```
+
+## Output
+
+```json
+{
+  "name": "ABC Tech Pvt Ltd",
+  "address": "123 Main Rd Chennai",
+  "phone": "+91 9876543210",
+  "website": "https://abc.com"
+}
+```
+
+---
+
+# Agent 6: Entity Matching Agent
+
+## Purpose
+
+Determine whether extracted citations belong to the same business.
+
+---
+
+## Name Matching
+
+### Master
+
+```text
+ABC Technologies
+```
+
+### Citation
+
+```text
+ABC Technologies Pvt Ltd
+```
+
+### Result
+
+```json
+{
+  "match": true,
+  "confidence": 96
+}
+```
+
+### Matching Methods
+
+- Levenshtein Distance
+- Jaro-Winkler
+- Embeddings
+- LLM Verification
+
+---
+
+## Address Matching
+
+### Master
+
+```text
+123 Main Road Chennai TN 600001
+```
+
+### Citation
+
+```text
+123 Main Rd Chennai Tamil Nadu 600001
+```
+
+### Result
+
+```json
+{
+  "match": true,
+  "confidence": 98
+}
+```
+
+### Address Normalization
+
+```text
+Road → Rd
+Street → St
+Tamil Nadu → TN
+Apartment → Apt
+Suite → Ste
+```
+
+---
+
+## Phone Matching
+
+### Normalize
+
+```text
++91 9876543210
+9876543210
+09876543210
+```
+
+### Standard Form
+
+```text
+9876543210
+```
+
+---
+
+# Agent 7: Duplicate Detection Agent
+
+## Purpose
+
+Identify duplicate business listings.
+
+## Input
+
+```json
+[
+  {
+    "name": "ABC Technologies"
+  },
+  {
+    "name": "ABC Tech"
+  }
+]
+```
+
+## Output
+
+```json
+{
+  "duplicate": true,
+  "confidence": 94
+}
+```
+
+---
+
+# Agent 8: NAP Scoring Agent
+
+## Purpose
+
+Calculate citation-level and business-level consistency scores.
+
+---
+
+## Weighting Model
+
+```text
+Business Name = 40%
+Address       = 40%
+Phone         = 20%
+```
+
+### Example
+
+```text
+Name Match    = 100
+Address Match = 90
+Phone Match   = 100
+```
+
+### Score
+
+```text
+(100 × 0.4) +
+(90 × 0.4) +
+(100 × 0.2)
+
+= 96
+```
+
+---
+
+## Business-Level Score
+
+```text
+Total Citations = 50
+Average Score   = 92
+```
+
+## Output
+
+```json
+{
+  "nap_score": 92
+}
+```
+
+---
+
+# Agent 9: Competitor Benchmark Agent
+
+## Purpose
+
+Compare business against local competitors.
+
+## Search
+
+```text
+Software Company Chennai
+```
+
+## Metrics
+
+- Reviews
+- Ratings
+- Citation Count
+- Category Usage
+- Local Ranking
+
+## Example Output
+
+```json
+{
+  "business_reviews": 150,
+  "competitor_average_reviews": 275,
+  "gap": 125
+}
+```
+
+---
+
+# Agent 10: Recommendation Agent
+
+## Purpose
+
+Generate SEO recommendations based on audit findings.
+
+## Input
+
+```json
+{
+  "nap_score": 78,
+  "duplicates": 3,
+  "issues": 12
+}
+```
+
+## Output
+
+```json
+{
+  "recommendations": [
+    "Update outdated phone number on JustDial",
+    "Correct address on Facebook",
+    "Remove duplicate GBP listing",
+    "Create missing citations"
+  ]
+}
+```
+
+---
+
+# Database Design
+
+## Businesses
+
+```sql
+CREATE TABLE Businesses (
+    Id UNIQUEIDENTIFIER PRIMARY KEY,
+    Name NVARCHAR(250),
+    Address NVARCHAR(MAX),
+    Phone NVARCHAR(50),
+    Website NVARCHAR(500),
+    Category NVARCHAR(200)
+);
+```
+
+---
+
+## Citations
+
+```sql
+CREATE TABLE Citations (
+    Id UNIQUEIDENTIFIER PRIMARY KEY,
+    BusinessId UNIQUEIDENTIFIER,
+    Source NVARCHAR(200),
+    Url NVARCHAR(MAX),
+    Score DECIMAL(5,2),
+    Status NVARCHAR(50)
+);
+```
+
+---
+
+## AuditIssues
+
+```sql
+CREATE TABLE AuditIssues (
+    Id UNIQUEIDENTIFIER PRIMARY KEY,
+    CitationId UNIQUEIDENTIFIER,
+    IssueType NVARCHAR(100),
+    Severity NVARCHAR(50),
+    Description NVARCHAR(MAX)
+);
+```
+
+---
+
+# AI Prompt Strategy
+
+## Extraction Prompt
+
+```text
+Extract Name, Address, Phone and Website.
+Return JSON only.
+```
+
+## Matching Prompt
+
+```text
+Determine if the following two business records
+refer to the same organization.
+
+Return:
+- Match
+- Confidence Score
+- Reason
+```
+
+## Recommendation Prompt
+
+```text
+Generate prioritized local SEO actions
+based on identified NAP issues.
+```
+
+---
+
+# Recommended Technology Stack
+
+## Frontend
+
+- React
+- Next.js
+- Tailwind CSS
+
+## Backend
+
+- .NET 9 Web API
+
+## AI Layer
+
+- Azure OpenAI GPT-5
+- Azure OpenAI Embeddings
+
+## Search
+
+- SerpAPI
+- DataForSEO
+
+## Scraping
+
+- Playwright
+
+## Database
+
+- SQL Server
+- PostgreSQL
+
+## Queue
+
+- Azure Service Bus
+
+## Cache
+
+- Redis
+
+## Monitoring
+
+- Application Insights
+
+---
+
+# Workflow Sequence
+
+```text
+User submits GBP URL
+          │
+          ▼
+Extract Official NAP
+          │
+          ▼
+Find Citation Sources
+          │
+          ▼
+Scrape Citation Pages
+          │
+          ▼
+Extract Citation NAP
+          │
+          ▼
+Match Against Official NAP
+          │
+          ▼
+Detect Duplicates
+          │
+          ▼
+Calculate NAP Score
+          │
+          ▼
+Benchmark Competitors
+          │
+          ▼
+Generate Recommendations
+          │
+          ▼
+Return Audit Report
+```
+
+---
+
+# Final API Response
+
+```json
+{
+  "business": {
+    "name": "ABC Technologies"
+  },
+  "napScore": 92,
+  "citationsAudited": 54,
+  "accurateCitations": 48,
+  "duplicatesFound": 2,
+  "issues": [
+    {
+      "source": "JustDial",
+      "severity": "High",
+      "issue": "Old Phone Number"
+    }
+  ],
+  "recommendations": [
+    "Update phone number on JustDial",
+    "Remove duplicate listing",
+    "Standardize business name across all citations"
+  ]
+}
+```
+
+---
+
+# Success Metrics
+
+| Metric | Target |
+|----------|----------|
+| Citation Coverage | >90% |
+| NAP Detection Accuracy | >95% |
+| Duplicate Detection Accuracy | >90% |
+| Recommendation Relevance | >90% |
+| End-to-End Audit Success Rate | >95% |
+
+---
+
+# Future Enhancements
+
+- Multi-location business support
+- Automated citation correction
+- GBP review analysis
+- Local rank tracking
+- AI-generated SEO action plans
+- Competitor gap analysis
+- White-label agency reporting
+- Scheduled recurring audits
