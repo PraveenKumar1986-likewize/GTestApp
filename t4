@@ -1,0 +1,204 @@
+pic 2: Dashboard
+US-003: View GBP Performance Dashboard
+As a business owner
+ I want to view key business metrics in one dashboard
+ So that I can monitor my online presence.
+Acceptance Criteria
+Dashboard shows average rating
+Dashboard shows total reviews
+Dashboard shows calls received
+Dashboard shows website clicks
+Dashboard shows direction requests
+Dashboard shows ranking score
+US-004: View Multi-Location Dashboard
+As a franchise owner
+ I want to view all locations in one place
+ So that I can compare performance.
+Acceptance Criteria
+Filter by location
+Compare ratings across locations
+Compare rankings across locations
+Export performance reports
+Epic 3: Review Management
+US-005: Receive New Review Alerts
+As a business owner
+ I want to receive instant notifications when new reviews arrive
+ So that I can respond quickly.
+Acceptance Criteria
+Push notification is sent
+Review details are displayed
+Notification opens review page
+US-006: AI Review Response Generation
+As a business owner
+ I want to generate AI-powered review responses
+ So that I can save time.
+Acceptance Criteria
+AI suggests response automatically
+Multiple tone options available
+Professional
+Friendly
+Empathetic
+User can edit before posting
+US-007: Respond to Reviews
+As a business owner
+ I want to reply directly from the mobile app
+ So that I can manage customer engagement efficiently.
+Acceptance Criteria
+Reply can be submitted to GBP
+Response status is tracked
+Response history is stored
+US-008: Analyze Review Sentiment
+As a business owner
+ I want to understand customer sentiment trends
+ So that I can improve customer experience.
+Acceptance Criteria
+Reviews categorized as Positive, Neutral, or Negative
+Sentiment score displayed
+Trends available by date range
+US-009: Negative Review Escalation
+As a business owner
+ I want to flag negative reviews for action
+ So that customer issues are addressed promptly.
+Acceptance Criteria
+Reviews below selected rating are flagged
+Team member can be assigned
+Escalation status tracked
+Epic 4: GBP Ranking Optimization
+US-010: Track Local Rankings
+As a business owner
+ I want to track keyword rankings in local search results
+ So that I can measure visibility improvements.
+Acceptance Criteria
+Add target keywords
+View ranking history
+Ranking trends displayed graphically
+US-011: GBP Health Score
+As a business owner
+ I want to see an overall GBP optimization score
+ So that I understand my profile health.
+Acceptance Criteria
+Health score displayed
+Score breakdown available
+Recommendations provided
+US-012: AI Ranking Recommendations
+As a business owner
+ I want to receive AI-driven improvement suggestions
+ So that I can improve my local rankings.
+Acceptance Criteria
+AI identifies optimization gaps
+Action recommendations generated
+Impact score displayed
+US-013: Competitor Ranking Analysis
+As a business owner
+ I want to compare my profile against competitors
+ So that I can identify opportunities.
+Acceptance Criteria
+Competitor list available
+Ranking comparison shown
+Review comparison available
+Epic 5: Google Posts Management
+US-014: Create AI-Generated Posts
+As a business owner
+ I want to create GBP posts using AI
+ So that I can keep my profile active.
+Acceptance Criteria
+AI generates content
+User can edit content
+Post preview available
+US-015: Schedule GBP Posts
+As a business owner
+ I want to schedule posts in advance
+ So that marketing remains consistent.
+Acceptance Criteria
+Date and time selection
+Scheduled posts visible
+Notifications before publishing
+Epic 6: Business Insights
+US-016: Customer Feedback Insights
+As a business owner
+ I want to understand common customer themes
+ So that I can improve services.
+Acceptance Criteria
+Top positive topics displayed
+Top complaint categories displayed
+Trend analysis available
+US-017: AI Action Plan
+As a business owner
+ I want to receive actionable recommendations
+ So that I can improve ratings and rankings.
+Acceptance Criteria
+Weekly recommendations generated
+Priority levels assigned
+Progress tracking available
+Epic 7: Notifications
+US-018: Smart Alerts
+As a business owner
+ I want to receive alerts about important GBP changes
+ So that I can take immediate action.
+Acceptance Criteria
+Rating drop alerts
+Negative review alerts
+Ranking drop alerts
+Profile completeness alerts
+Epic 8: Reports & Analytics
+US-019: Generate Performance Reports
+As a business owner
+ I want to view performance reports
+ So that I can measure business growth.
+Acceptance Criteria
+Weekly reports available
+Monthly reports available
+KPI trends displayed
+US-020: Export Reports
+As a business owner
+ I want to export analytics reports
+ So that I can share them with stakeholders.
+Acceptance Criteria
+PDF export option
+Excel export option
+Email sharing option
+Epic 9: Subscription & Billing
+US-021: Manage Subscription
+As a user
+ I want to upgrade or downgrade my plan
+ So that I can access required features.
+Acceptance Criteria
+Subscription details displayed
+Upgrade option available
+Payment history accessible
+Epic 10: Admin Panel
+US-022: Manage Team Access
+As an admin
+ I want to assign roles and permissions
+ So that team members have appropriate access.
+Acceptance Criteria
+Invite users
+Assign roles
+Revoke access
+MVP Release Scope (Phase 1)
+User Authentication
+Google Business Profile Integration
+Dashboard
+Review Management
+AI Review Responses
+Sentiment Analysis
+GBP Health Score
+AI Ranking Recommendations
+Notifications
+Basic Analytics
+Phase 2
+Competitor Analysis
+Multi-location Management
+AI Post Generation
+Post Scheduling
+Advanced SEO Recommendations
+Export Reports
+Phase 3
+Predictive Ranking Engine
+Voice Assistant
+WhatsApp Integration
+AI Reputation Management Automation
+Franchise Management Features
+This backlog provides a solid foundation for a GBP AI Agent mobile application and is ready for conversion into Agile epics, features, and sprint-ready stories.
+Provide your feedback on BizChat
+AllPeoplePeopleFilesFilesMeetingsMeetingsEmailsEmailsChatsChatsChannelsChannelsPower BIPower BIOtherOther
